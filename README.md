@@ -1,7 +1,7 @@
 ## Nginx common useful configuration
 
 Time track:
-- Filipp Frizzy 16.17h
+- Filipp Frizzy 18.17h
 
 
 ### Known traps
