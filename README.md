@@ -1,12 +1,12 @@
-# Nginx common useful configuration
+## Nginx common useful configuration
 
 Time track:
-- Filipp Frizzy 14.17h
+- Filipp Frizzy 16.17h
 
 
-## Known traps
+### Known traps
 
-### Cache with default settings break all client specific content
+#### Cache with default settings break all client specific content
 If you use fastcgi, proxy or uwsgi cache with default settings like
 ```
 http {
@@ -31,8 +31,8 @@ http {
     }
 }
 ```
-in both locations Nginx will cache every response.  
-So if your site has some login functionality or shopping cart or whatever,  
+in both locations Nginx will cache every response. 
+So if your site has some login functionality or shopping cart or whatever, 
 it will be mixed and most of clients will get response with content of some other clients.
 
 In this configuration I suggest caches only as a auxiliary tool for caching common non 200 status responses:
@@ -46,10 +46,10 @@ fastcgi_cache_valid 302 307 5s; # cache Temporary Redirect for decrease loading 
 fastcgi_cache_valid 200 0;
 fastcgi_cache_valid any 0;
 ```
-And even this one commented out in cache.conf, so you should choose yourself  
+And even this one commented out in cache.conf, so you should choose yourself 
 and enable it manually for whole site or some locations.
 
-However, how we can safely enable cache for all responses?..
+However, how we can safely enable cache for all responses?.
 And use cache config like
 ```
 fastcgi_cache_valid 401 0;
@@ -60,26 +60,29 @@ fastcgi_cache_valid 200 5m;
 ```
 
 1) *The easiest*  
-By default, NGINX respects the Cache-Control headers from origin servers.  
-It does not cache responses with Cache-Control set to Private, No-Cache, or  
-No-Store or with Set-Cookie in the response header. So if your app can add `Cache-Control`  
+By default, NGINX respects the Cache-Control headers from origin servers. 
+It does not cache responses with Cache-Control set to Private, No-Cache, or 
+No-Store or with Set-Cookie in the response header. So if your app can add `Cache-Control` 
 header into every response - we are done here :) [Example](https://serverfault.com/a/815990)
 
 2) *The most correct*  
-If you app can store cache in an external cache database  
-like redis or memcached, you can use Nginx [redis](https://github.com/openresty/redis2-nginx-module) or [memcached](https://nginx.org/ru/docs/http/ngx_http_memcached_module.html) modules instead of nginx cache  
-for both caching and speeding up your site.
+If you app can store cache in an external cache database 
+like redis or memcached, you can use Nginx 
+[redis](https://github.com/openresty/redis2-nginx-module) or 
+[memcached](https://nginx.org/en/docs/http/ngx_http_memcached_module.html) 
+modules instead of nginx cache for both caching and speeding up your site.
 
 3) *The most difficult*  
-You can check URI and cookies by nginx itself, but this is hard  
-and add a mess into your configs and risk of mistakes. There is a good example in  
-the [engintron](https://github.com/engintron/engintron/blob/master/nginx/proxy_params_dynamic) configs, but it's under GPLv2 so I can't include it into my snippets.  
-Also there is a little easier [example](https://dev.to/ale_ukr/how-to-make-nginx-cache-cookie-aware-2ffl) how to check only one cookie.
+You can check URI and cookies by nginx itself, but this is hard 
+and add a mess into your configs and risk of mistakes. There is a good example in 
+the [engintron](https://github.com/engintron/engintron/blob/master/nginx/proxy_params_dynamic) configs, 
+but it's under GPLv2 so I can't include it into my snippets. Also there is a little easier 
+[example](https://dev.to/ale_ukr/how-to-make-nginx-cache-cookie-aware-2ffl) how to check only one cookie.
 
-4) *Bonus: the lucky one*
+4) *Bonus: the lucky one*  
 For static content locations you can just enable cache without any dancing around :)
 
-### [Adding add_header remove all add_header directives from parent sections](https://www.peterbe.com/plog/be-very-careful-with-your-add_header-in-nginx)
+#### [Adding add_header remove all add_header directives from parent sections](https://www.peterbe.com/plog/be-very-careful-with-your-add_header-in-nginx)
 
 Configuration like
 ```
@@ -88,13 +91,13 @@ add_header Name1 Value1;
 location / {
     add_header Name2 Value2;
 ```
-After all produce only `Name2` header in response.  
-So use add_header.conf include or copy all headers manually  
+After all produce only `Name2` header in response. 
+So use add_header.conf include or copy all headers manually 
 into sections under HTTP one.
 
-## Nginx build info
+### Nginx build info
 
-### Docker
+#### Docker
 ```
 nginx version: nginx/1.17.9
 built by gcc 8.3.0 (Debian 8.3.0-6)
@@ -147,7 +150,7 @@ configure arguments:
 --with-ld-opt='-Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie'
 ```
 
-### Ubuntu 18.04 build info
+#### Ubuntu 18.04 build info
 ```
 nginx version: nginx/1.14.0 (Ubuntu)
 built with OpenSSL 1.1.1  11 Sep 2018
