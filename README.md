@@ -1,8 +1,7 @@
 ## Nginx common useful configuration
 
 Time track:
-- Filipp Frizzy 18.17h
-
+- Filipp Frizzy 22.67h
 
 ### Known traps
 
@@ -94,6 +93,9 @@ location / {
 After all produce only `Name2` header in response. 
 So use add_header.conf include or copy all headers manually 
 into sections under HTTP one.
+```
+include /etc/nginx/snippets/headers.conf
+```
 
 ### Nginx build info
 

@@ -1,0 +1,8 @@
+set $corps_origin https://{{ item.site }};
+if ($http_origin ~* "^https?://(?:.+\.)?{{ item.domain }}(?::\d{1,5})?$") {
+    set $corps_origin "$http_origin";
+}
+add_header "Access-Control-Allow-Origin" "$corps_origin";
+
+# add_header will override all previous directives from parent sections
+include /etc/nginx/snippets/headers.conf

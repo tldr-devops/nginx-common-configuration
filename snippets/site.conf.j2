@@ -1,0 +1,61 @@
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name {{ item }};
+
+    # for non docker setup
+    # access_log      /var/log/nginx/{{ item }}-access.log main buffer=512k flush=1s;
+    # error_log       /var/log/nginx/{{ item }}-error.log error;
+
+    location /.well-known/acme-challenge {
+        root /var/www/letsencrypt;
+        try_files $uri $uri/ =404;
+    }
+
+    location / {
+        return 301 https://{{ item }}$request_uri;
+    }
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+
+    server_name {{ item }};
+
+    # for non docker setup
+    # access_log      /var/log/nginx/{{ item }}-access.log main buffer=512k flush=1s;
+    # error_log       /var/log/nginx/{{ item }}-error.log error;
+
+    root /var/www/{{ item }}/public;
+
+    # let's encrypt cert
+    ssl_certificate         /etc/letsencrypt/live/{{ item }}/fullchain.pem;
+    ssl_certificate_key     /etc/letsencrypt/live/{{ item }}/privkey.pem;
+    ssl_trusted_certificate /etc/letsencrypt/live/{{ item }}/fullchain.pem;
+
+    # ssl_certificate         /etc/ssl/certs/{{ item.domain }}.crt;
+    # ssl_certificate_key     /etc/ssl/private/{{ item.domain }}.key;
+
+    # location ~* \.(js|css|png|jpg|jpeg|gif|ico|swf|eot|ttf|otf|woff|woff2)$
+    include /etc/nginx/snippets/static_location.conf
+
+    location /backend {
+        proxy_pass http://127.0.0.1:8080
+        include /etc/nginx/snippets/proxy.conf
+    }
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass 127.0.0.1:9000;
+        include /etc/nginx/snippets/fastcgi.conf
+    }
+
+    # location ~ (/\.|^/protected)
+    include /etc/nginx/snippets/protected_locations.conf
+
+}
