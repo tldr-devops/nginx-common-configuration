@@ -1,7 +1,93 @@
 ## Nginx common useful configuration
 
+Nginx configs. Not the most powerful, productive or the best one. Just useful configs, which I would like to see in default nginx packages out of the box 😆
+Bonus: fail2ban, filebeat and docker-compose configs for nginx :)
+
+Warning: I'm living in Belarus - country between EU and Russia. [And today we are fighting for our freedom against 'the last dictator of the Europe'](https://www.euronews.com/2020/06/25/belarus-is-no-longer-scared-of-lukashenko-europe-s-last-dictator-will-fall-view).
+So I can't guarantee that I'll be able to maintain this repo scrupulously this summer. Sorry, guys
+
+**Motivation**: I have been using nginx for last 4 years at least, and I configured it really for hundreds setups of 30+ companies and startups: sites, apps, websockets, proxies, load balancing, from few up to 1k rps, etc... And I'm a little bit disappointed by [the official nginx wiki](https://www.nginx.com/resources/wiki/).
+The last drop was this [blog post in the official blog](https://www.nginx.com/blog/help-the-world-by-healing-your-nginx-configuration/):
+this post doesn't provide a complete solution, half of these tips can be included into nginx configs or snippets by default,
+and some of the other tips, such as disabling access logging, in my opinion are the bad practice 😆
+
+At the same time there are a lot good documentation and best practices:
+[nginx docs](https://nginx.org/en/docs/),
+[digitalocean config generator](https://www.digitalocean.com/community/tools/nginx),
+[mozilla ssl best practices](https://ssl-config.mozilla.org/#server=nginx&version=1.17.7&config=intermediate&openssl=1.1.1d&guideline=5.4),
+etc... And here I'm trying to put together all good patterns and knowledges so anyone will be able to copy this configs and get good nginx setup out of the box :)
+
+There is also interesting [openbridge nginx](https://github.com/openbridge/nginx) docker image,
+but I haven't checked it properly yet, their configs require addition nginx modules and setup
+and it can't be just copied to usual nginx. However, you can use it with docker.
+Also I don't agree with nginx microcache for every site, see known traps.
+
 Time track:
-- Filipp Frizzy 23.67h
+- [Filipp Frizzy](https://github.com/Friz-zy/) 33.34h
+
+### Configs
+
+#### Main configs
+Almost all sections moved from main `nginx.conf` into `conf.d` directory:
+
+* `basic.conf`  
+Basic settings, security, mime types, charset, index, timeouts, open file cache, etc...
+* `cache.conf`  
+Fastcgi, Proxy and Uwsgi cache setup, see known traps before using ;)
+* `gzip.conf`  
+Gzip and gzip static
+* `log_format.conf`  
+Extended log formats
+* `real_ip.conf`  
+Allow X-Forwarded-For header from local networks and [cloudflare](https://www.cloudflare.com/)
+* `request_id.conf`  
+Add X-Request-ID header into each request for tracing and debugging
+* `ssl.conf`  
+SSL best practice from [mozilla](https://ssl-config.mozilla.org/#server=nginx&version=1.17.7&config=intermediate&openssl=1.1.1d&guideline=5.4)
+
+#### Snippets
+Templates and includes. You can also use [config generator](https://www.digitalocean.com/community/tools/nginx) from digitalocean :)
+
+* corps.conf.j2  
+Template of corps politic for multiple subdomains setup
+* default.conf  
+Example of default config with nginx_status, let's encrypt check and redirect to https
+* fastcgi.conf  
+Include for php locations: fastcgi parameters, timeouts and cache example
+* headers.conf  
+Include with all headers, see known traps
+* protected_locations.conf  
+Include with protected locations with 'deny all'
+* proxy.conf  
+Include for proxy locations: proxy headers, parameters, timeouts and cache example
+* referer.conf.j2  
+Template of referer protection for cases when you concurents use your fail2ban protection against you, see known traps
+* site.conf.j2  
+Template of common site configuration
+* static_location.conf  
+Include with location for static files
+
+#### Docker-compose
+`docker-compose.yml` example for nginx
+
+#### Fail2ban
+You can use fail2ban for banning some bots even behind load balancer.
+`nginx-deny` action will add `deny <ip>;` into `/etc/nginx/conf.d/banned.conf` and reload nginx.
+
+Warning: your evil competitors can use your protection like fail2ban against you, check known traps ;)
+
+Files for copying:
+```
+fail2ban/jail.local => /etc/fail2ban/jail.local
+fail2ban/action-nginx-deny.conf => /etc/fail2ban/action.d/nginx-deny.conf
+fail2ban/filter-magento.conf => /etc/fail2ban/filter.d/nginx-magento.conf
+fail2ban/filter-wordpress.conf => /etc/fail2ban/filter.d/nginx-wordpress.conf
+fail2ban/filter-nginx-noscript.conf => /etc/fail2ban/filter.d/nginx-noscript.conf
+```
+
+#### Filebeat
+Filebeat by default can't parse extended nginx access log formats, so you should override ingest json:
+Copy `filebeat/nginx_access_ingest.json` to `/usr/share/filebeat/module/nginx/access/ingest/default.json`
 
 ### Known traps
 
@@ -34,7 +120,7 @@ in both locations Nginx will cache every response.
 So if your site has some login functionality or shopping cart or whatever, 
 it will be mixed and most of clients will get response with content of some other clients.
 
-In this configuration I suggest caches only as a auxiliary tool for caching common non 200 status responses:
+In this configuration I suggest caches only as an additional tool for caching common non 200 status responses:
 ```
 fastcgi_cache_valid 499 500 502 503 504 521 522 523 524 3s; # circuit breaker
 fastcgi_cache_valid 404 15m; # cache Not Found for decrease loading to backend
@@ -96,6 +182,21 @@ into sections under HTTP one.
 ```
 include /etc/nginx/snippets/headers.conf
 ```
+
+#### Fail2ban and any other protection can be used against you
+
+Not only that incorrectly configured protection will block valid users,
+even right configured protection like fail2ban, especially with `botsearch-common` filter,
+can be used for attack to you. For example, you competitors can add to their sites something like
+```
+<img src="https://{{ your site }}/admin/1.jpg">
+<img src="https://{{ your site }}/phpmyadmin/1.jpg">
+<img src="https://{{ your site }}/roundcube/1.jpg">
+```
+
+Then valid user after visit to the their site will be automatically blocked on your site 😆
+You can fight with this practice using `http_referer`, see `snippets/referer.conf.j2` template ;)
+Warning: I have not tested this code yet
 
 ### Nginx build info
 

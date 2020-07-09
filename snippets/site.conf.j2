@@ -38,6 +38,12 @@ server {
     # ssl_certificate         /etc/ssl/certs/{{ item.domain }}.crt;
     # ssl_certificate_key     /etc/ssl/private/{{ item.domain }}.key;
 
+    # corps hack
+    # include /etc/nginx/snippets/corps.conf
+
+    # referer protection
+    # include /etc/nginx/snippets/referer.conf
+
     # location ~* \.(js|css|png|jpg|jpeg|gif|ico|swf|eot|ttf|otf|woff|woff2)$
     include /etc/nginx/snippets/static_location.conf
 
