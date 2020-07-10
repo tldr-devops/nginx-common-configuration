@@ -23,7 +23,7 @@ and it can't be just copied to usual nginx. However, you can use it with docker.
 Also I don't agree with nginx microcache for every site, see known traps.
 
 Time track:
-- [Filipp Frizzy](https://github.com/Friz-zy/) 33.34h
+- [Filipp Frizzy](https://github.com/Friz-zy/) 35.34h
 
 ### Configs
 
@@ -197,6 +197,43 @@ can be used for attack to you. For example, you competitors can add to their sit
 Then valid user after visit to the their site will be automatically blocked on your site 😆
 You can fight with this practice using `http_referer`, see `snippets/referer.conf.j2` template ;)
 Warning: I have not tested this code yet
+
+#### Errors like ` failed (24: Too many open files)` or `worker_connections exceed open file resource limit`
+
+Problem with limit of open files (`ulimit -n`)
+
+You can change it
+* systemd  
+Add into `/etc/systemd/system/nginx.d/override.conf`
+```
+[Service]
+LimitNOFILE=100000
+```
+* old init system  
+Change `/etc/default/nginx`
+```
+ULIMIT="-n 100000"
+```
+* docker-compose
+```
+ulimits:
+  nproc: 65535
+  nofile:
+    soft: 100000
+    hard: 100000
+```
+
+Maybe you should also change `/etc/security/limits.conf`
+```
+nginx           hard    nofile          100000
+nginx           soft    nofile          100000
+www-data        hard    nofile          100000
+www-data        soft    nofile          100000
+```
+and `/etc/sysctl.conf`
+```
+fs.file-max = 394257
+```
 
 ### Nginx build info
 
