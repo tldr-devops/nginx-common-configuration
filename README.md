@@ -23,7 +23,7 @@ and it can't be just copied to usual nginx. However, you can use it with docker.
 Also I don't agree with nginx microcache for every site, see known traps.
 
 Time track:
-- [Filipp Frizzy](https://github.com/Friz-zy/) 35.34h
+- [Filipp Frizzy](https://github.com/Friz-zy/) 35.84h
 
 ### Configs
 
@@ -31,7 +31,7 @@ Time track:
 Almost all sections moved from main `nginx.conf` into `conf.d` directory:
 
 * `basic.conf`  
-Basic settings, security, mime types, charset, index, timeouts, open file cache, etc...
+Basic settings, mime types, charset, index, timeouts, open file cache, etc...
 * `cache.conf`  
 Fastcgi, Proxy and Uwsgi cache setup, see known traps before using ;)
 * `gzip.conf`  
@@ -42,29 +42,31 @@ Extended log formats
 Allow X-Forwarded-For header from local networks and [cloudflare](https://www.cloudflare.com/)
 * `request_id.conf`  
 Add X-Request-ID header into each request for tracing and debugging
+* `security.conf`  
+Security settings and headers
 * `ssl.conf`  
 SSL best practice from [mozilla](https://ssl-config.mozilla.org/#server=nginx&version=1.17.7&config=intermediate&openssl=1.1.1d&guideline=5.4)
 
 #### Snippets
 Templates and includes. You can also use [config generator](https://www.digitalocean.com/community/tools/nginx) from digitalocean :)
 
-* corps.conf.j2  
+* `corps.conf.j2`  
 Template of corps politic for multiple subdomains setup
-* default.conf  
+* `default.conf`  
 Example of default config with nginx_status, let's encrypt check and redirect to https
-* fastcgi.conf  
+* `fastcgi.conf`  
 Include for php locations: fastcgi parameters, timeouts and cache example
-* headers.conf  
+* `headers.conf`  
 Include with all headers, see known traps
-* protected_locations.conf  
+* `protected_locations.conf`  
 Include with protected locations with 'deny all'
-* proxy.conf  
+* `proxy.conf`  
 Include for proxy locations: proxy headers, parameters, timeouts and cache example
-* referer.conf.j2  
+* `referer.conf.j2`  
 Template of referer protection for cases when you concurents use your fail2ban protection against you, see known traps
-* site.conf.j2  
+* `site.conf.j2`  
 Template of common site configuration
-* static_location.conf  
+* `static_location.conf`  
 Include with location for static files
 
 #### Docker-compose
