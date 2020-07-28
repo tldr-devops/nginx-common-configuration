@@ -25,6 +25,15 @@ Also I don't agree with nginx microcache for every site, see known traps.
 Time track:
 - [Filipp Frizzy](https://github.com/Friz-zy/) 35.84h
 
+### Support
+
+You can support this or any other of my projects
+* by sending your PRs with improving my configs or english texts 😂
+* by sending me donations:
+  - [donationalerts.com/r/filipp_frizzy](https://www.donationalerts.com/r/filipp_frizzy)
+  - ETH 0xCD9fC1719b9E174E911f343CA2B391060F931ff7
+  - BTC bc1q8fhsj24f5ncv3995zk9v3jhwwmscecc6w0tdw3
+
 ### Configs
 
 #### Main configs
