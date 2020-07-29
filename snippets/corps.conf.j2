@@ -5,4 +5,4 @@ if ($http_origin ~* "^https?://(?:.+\.)?{{ item.domain }}(?::\d{1,5})?$") {
 add_header "Access-Control-Allow-Origin" "$corps_origin";
 
 # add_header will override all previous directives from parent sections
-include /etc/nginx/snippets/headers.conf
+include snippets/headers.conf;

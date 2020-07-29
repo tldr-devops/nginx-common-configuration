@@ -15,15 +15,26 @@ At the same time there are a lot good documentation and best practices:
 [nginx docs](https://nginx.org/en/docs/),
 [digitalocean config generator](https://www.digitalocean.com/community/tools/nginx),
 [mozilla ssl best practices](https://ssl-config.mozilla.org/#server=nginx&version=1.17.7&config=intermediate&openssl=1.1.1d&guideline=5.4),
-etc... And here I'm trying to put together all good patterns and knowledges so anyone will be able to copy this configs and get good nginx setup out of the box :)
+etc...
 
-There is also interesting [openbridge nginx](https://github.com/openbridge/nginx) docker image,
-but I haven't checked it properly yet, their configs require addition nginx modules and setup
+And there are also some more interesting projects and examples:
+- [nginx-admins-handbook](https://github.com/trimstray/nginx-admins-handbook)  
+Huge total guide, must read for any nginx admin.
+- [html5-boilerplate nginx configs](https://github.com/h5bp/server-configs-nginx)  
+Most popular collection of configuration snippets.
+- [nginx-boilerplate](https://github.com/nginx-boilerplate/nginx-boilerplate)  
+Another one common boilerplate.
+- [elasticweb/nginx-configs](https://github.com/elasticweb/nginx-configs)  
+Collection of Nginx configs for most popular CMS/CMF/Frameworks based on PHP.
+- [openbridge/nginx](https://github.com/openbridge/nginx)  
+Docker image, but I haven't checked it properly yet, their configs require addition nginx modules and setup
 and it can't be just copied to usual nginx. However, you can use it with docker.
 Also I don't agree with nginx microcache for every site, see known traps.
 
+So here I'm trying to put together all (my) good patterns and knowledges, and organize it as simple as possible in compare with complex examples above. So anyone will be able to copy this configs and get good nginx setup out of the box :)
+
 Time track:
-- [Filipp Frizzy](https://github.com/Friz-zy/) 35.84h
+- [Filipp Frizzy](https://github.com/Friz-zy/) 39.09h
 
 ### Support
 

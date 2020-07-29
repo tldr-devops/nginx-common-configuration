@@ -39,17 +39,17 @@ server {
     # ssl_certificate_key     /etc/ssl/private/{{ item.domain }}.key;
 
     # corps hack
-    # include /etc/nginx/snippets/corps.conf
+    # include snippets/corps.conf;
 
     # referer protection
-    # include /etc/nginx/snippets/referer.conf
+    # include snippets/referer.conf;
 
     # location ~* \.(js|css|png|jpg|jpeg|gif|ico|swf|eot|ttf|otf|woff|woff2)$
-    include /etc/nginx/snippets/static_location.conf
+    include snippets/static_location.conf;
 
     location /backend {
-        proxy_pass http://127.0.0.1:8080
-        include /etc/nginx/snippets/proxy.conf
+        proxy_pass http://127.0.0.1:8080;
+        include snippets/proxy.conf;
     }
 
     location / {
@@ -58,10 +58,10 @@ server {
 
     location ~ \.php$ {
         fastcgi_pass 127.0.0.1:9000;
-        include /etc/nginx/snippets/fastcgi.conf
+        include snippets/fastcgi.conf;
     }
 
     # location ~ (/\.|^/protected)
-    include /etc/nginx/snippets/protected_locations.conf
+    include snippets/protected_locations.conf;
 
 }
