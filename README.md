@@ -34,7 +34,7 @@ Also I don't agree with nginx microcache for every site, see known traps.
 So here I'm trying to put together all (my) good patterns and knowledges, and organize it as simple as possible in compare with complex examples above. So anyone will be able to copy this configs and get good nginx setup out of the box :)
 
 Time track:
-- [Filipp Frizzy](https://github.com/Friz-zy/) 39.09h
+- [Filipp Frizzy](https://github.com/Friz-zy/) 41.09h
 
 ### Support
 
@@ -84,6 +84,8 @@ Include with protected locations with 'deny all'
 Include for proxy locations: proxy headers, parameters, timeouts and cache example
 * `referer.conf.j2`  
 Template of referer protection for cases when you concurents use your fail2ban protection against you, see known traps
+* `resolver.conf`  
+Include for dynamic dns resolving, see known traps
 * `site.conf.j2`  
 Template of common site configuration
 * `static_location.conf`  
@@ -172,6 +174,16 @@ It does not cache responses with Cache-Control set to Private, No-Cache, or
 No-Store or with Set-Cookie in the response header. So if your app can add `Cache-Control` 
 header into every response - we are done here :) [Example](https://serverfault.com/a/815990)
 
+```
+Parameters of caching can also be set directly in the response header. This has higher priority than setting of caching time using the directive.
+- The “X-Accel-Expires” header field sets caching time of a response in seconds. The zero value disables caching for a response. If the value starts with the @ prefix, it sets an absolute time in seconds since Epoch, up to which the response may be cached.
+- If the header does not include the “X-Accel-Expires” field, parameters of caching may be set in the header fields “Expires” or “Cache-Control”.
+- If the header includes the “Set-Cookie” field, such a response will not be cached.
+- If the header includes the “Vary” field with the special value “*”, such a response will not be cached (1.7.7). If the header includes the “Vary” field with another value, such a response will be cached taking into account the corresponding request header fields (1.7.7).
+Processing of one or more of these response header fields can be disabled using the fastcgi_ignore_headers directive.
+```
+[ngx_http_fastcgi_module](https://nginx.org/en/docs/http/ngx_http_fastcgi_module.html)
+
 2) *The most correct*  
 If you app can store cache in an external cache database 
 like redis or memcached, you can use Nginx 
@@ -203,6 +215,38 @@ So use add_header.conf include or copy all headers manually
 into sections under HTTP one.
 ```
 include /etc/nginx/snippets/headers.conf
+```
+
+#### DNS resolving and cache in Docker, Kubernetes and other dynamic environments
+
+By default, as NGINX starts up or reloads its configuration,
+it queries a DNS server to resolve backend dns records.
+The DNS server returns the list of backend IPs,
+and NGINX uses the default Round Robin algorithm to load balance requests among them.
+NGINX chooses the DNS server from the OS configuration file /etc/resolv.conf.
+This method is the least flexible way to do service discovery and has the following additional drawbacks:
+- If the domain name can’t be resolved, NGINX fails to start or reload its configuration.
+- NGINX caches the DNS records until the next restart or configuration reload, ignoring the records’ TTL values.
+
+For dynamic dns resolving in docker, k8s and other dynamic environments,
+you should set the Domain Name in a Variable and add resolver directive
+to explicitly specify the name server
+as NGINX does not refer to /etc/resolv.conf in this case.
+
+```
+resolver 127.0.0.1 valid=10s;
+
+server {
+    location / {
+        set $backend backends.example.com;
+        proxy_pass http://$backend;
+    }
+}
+```
+
+You can configure and include `resolver.conf` snippet for manage resolver options:
+```
+include /etc/nginx/snippets/resolver.conf
 ```
 
 #### Fail2ban and any other protection can be used against you
