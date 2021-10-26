@@ -34,7 +34,7 @@ Also I don't agree with nginx microcache for every site, see known traps.
 So here I'm trying to put together all (my) good patterns and knowledges, and organize it as simple as possible in compare with complex examples above. So anyone will be able to copy this configs and get good nginx setup out of the box :)
 
 Time track:
-- [Filipp Frizzy](https://github.com/Friz-zy/) 41.75h
+- [Filipp Frizzy](https://github.com/Friz-zy/) 42.25h
 
 ### Support
 
