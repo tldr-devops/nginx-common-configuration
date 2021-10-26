@@ -34,12 +34,12 @@ Also I don't agree with nginx microcache for every site, see known traps.
 So here I'm trying to put together all (my) good patterns and knowledges, and organize it as simple as possible in compare with complex examples above. So anyone will be able to copy this configs and get good nginx setup out of the box :)
 
 Time track:
-- [Filipp Frizzy](https://github.com/Friz-zy/) 41.09h
+- [Filipp Frizzy](https://github.com/Friz-zy/) 41.75h
 
 ### Support
 
 You can support this or any other of my projects
-* by sending your PRs with improving my configs or english texts 😂
+* by sending your PRs with improving my configs or texts 😂
 * by sending me donations:
   - [donationalerts.com/r/filipp_frizzy](https://www.donationalerts.com/r/filipp_frizzy)
   - ETH 0xCD9fC1719b9E174E911f343CA2B391060F931ff7
@@ -263,6 +263,10 @@ can be used for attack to you. For example, you competitors can add to their sit
 Then valid user after visit to the their site will be automatically blocked on your site 😆
 You can fight with this practice using `http_referer`, see `snippets/referer.conf.j2` template ;)
 Warning: I have not tested this code yet
+
+#### Includes like `<dir>/*.conf` are processed in the alphabetic order
+
+This is important for nginx in docker as all configs are located in one dir
 
 #### Errors like ` failed (24: Too many open files)` or `worker_connections exceed open file resource limit`
 
