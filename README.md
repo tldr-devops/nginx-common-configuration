@@ -3,10 +3,10 @@
 Nginx configs. Not the most powerful, productive or the best one. Just useful configs, which I would like to see in default nginx packages out of the box 😆
 Bonus: fail2ban, filebeat and docker-compose configs for nginx :)
 
-Warning: I'm living in Belarus - country between EU and Russia. [And today we are fighting for our freedom against 'the last dictator of the Europe'](https://www.euronews.com/2020/06/25/belarus-is-no-longer-scared-of-lukashenko-europe-s-last-dictator-will-fall-view).
-So I can't guarantee that I'll be able to maintain this repo scrupulously this summer. Sorry, guys
+Warning: I'm living in Belarus - a country between the EU and Russia. [And today we are fighting for our freedom against 'the last dictator of the Europe'](https://www.euronews.com/2020/06/25/belarus-is-no-longer-scared-of-lukashenko-europe-s-last-dictator-will-fall-view).
+So I can't guarantee that I'll be able to maintain this repo scrupulously this time. Sorry, guys
 
-**Motivation**: I have been using nginx for last 4 years at least, and I configured it really for hundreds setups of 30+ companies and startups: sites, apps, websockets, proxies, load balancing, from few up to 1k rps, etc... And I'm a little bit disappointed by [the official nginx wiki](https://www.nginx.com/resources/wiki/).
+**Motivation**: I have been using nginx for the last 5 years at least, and I configured it really for hundreds setups of 30+ companies and startups: sites, apps, websockets, proxies, load balancing, from a few up to 1k rps, etc... And I'm a little bit disappointed by [the official nginx wiki](https://www.nginx.com/resources/wiki/).
 The last drop was this [blog post in the official blog](https://www.nginx.com/blog/help-the-world-by-healing-your-nginx-configuration/):
 this post doesn't provide a complete solution, half of these tips can be included into nginx configs or snippets by default,
 and some of the other tips, such as disabling access logging, in my opinion are the bad practice 😆
@@ -28,10 +28,10 @@ Another one common boilerplate.
 Collection of Nginx configs for most popular CMS/CMF/Frameworks based on PHP.
 - [openbridge/nginx](https://github.com/openbridge/nginx)  
 Docker image, but I haven't checked it properly yet, their configs require addition nginx modules and setup
-and it can't be just copied to usual nginx. However, you can use it with docker.
+and it can't be just copied to the usual nginx setup. However, you can use it with docker.
 Also I don't agree with nginx microcache for every site, see known traps.
 
-So here I'm trying to put together all (my) good patterns and knowledges, and organize it as simple as possible in compare with complex examples above. So anyone will be able to copy this configs and get good nginx setup out of the box :)
+So here I'm trying to put together all (my) good patterns and knowledge, and organize it as simply as possible in comparison with complex examples above. So anyone will be able to copy this configs and get a good nginx setup out of the box :)
 
 Time track:
 - [Filipp Frizzy](https://github.com/Friz-zy/) 42.41h
@@ -41,6 +41,7 @@ Time track:
 You can support this or any other of my projects
 * by sending your PRs with improving my configs or texts 😂
 * by sending me donations:
+  - [ko-fi.com/filipp_frizzy](https://ko-fi.com/filipp_frizzy)
   - [donationalerts.com/r/filipp_frizzy](https://www.donationalerts.com/r/filipp_frizzy)
   - ETH 0xCD9fC1719b9E174E911f343CA2B391060F931ff7
   - BTC bc1q8fhsj24f5ncv3995zk9v3jhwwmscecc6w0tdw3
