@@ -1,7 +1,7 @@
 ## Nginx common useful configuration
 
 Nginx configs. Not the most powerful, productive or the best one. Just useful configs, which I would like to see in default nginx packages out of the box 😆
-Bonus: fail2ban, filebeat and docker-compose configs for nginx :)
+Bonus: fail2ban, filebeat, dockerfile and docker-compose configs for nginx :)
 
 Warning: I'm living in Belarus - a country between the EU and Russia. [And today we are fighting for our freedom against 'the last dictator of the Europe'](https://www.euronews.com/2020/06/25/belarus-is-no-longer-scared-of-lukashenko-europe-s-last-dictator-will-fall-view).
 So I can't guarantee that I'll be able to maintain this repo scrupulously this time. Sorry, guys
@@ -35,8 +35,12 @@ Official nginx docker image and docs.
 
 So here I'm trying to put together all (my) good patterns and knowledge, and organize it as simply as possible in comparison with complex examples above. So anyone will be able to copy this configs and get a good nginx setup out of the box :)
 
+You can vote for my feature requests in official [docker-nginx](https://github.com/nginxinc/docker-nginx) repo:
+* [[Feature Request] Advanced default settings](https://github.com/nginxinc/docker-nginx/issues/593)
+* [[Feature Request] Custom envsubst for templating with default values](https://github.com/nginxinc/docker-nginx/issues/592)
+
 Time track:
-- [Filipp Frizzy](https://github.com/Friz-zy/) 46.23h
+- [Filipp Frizzy](https://github.com/Friz-zy/) 48.23h
 
 ### Support
 
