@@ -43,7 +43,7 @@ Time track:
 You can support this or any other of my projects
 * by sending your PRs with improving my configs or texts 😂
 * by sending me donations:
-  - [ko-fi.com/filipp_frizzy](https://ko-fi.com/filipp_frizzy)
+  - [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/filipp_frizzy)
   - [donationalerts.com/r/filipp_frizzy](https://www.donationalerts.com/r/filipp_frizzy)
   - ETH 0xCD9fC1719b9E174E911f343CA2B391060F931ff7
   - BTC bc1q8fhsj24f5ncv3995zk9v3jhwwmscecc6w0tdw3
@@ -94,7 +94,7 @@ Template of common site configuration
 * `static_location.include`  
 Include with location for static files
 
-# Dockerfile
+#### Dockerfile
 `Dockerfile` example with build args, configs copying and custom envsubst template engine
 
 #### Docker-compose
