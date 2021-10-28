@@ -8,6 +8,7 @@ services:
         - nginx.conf:/etc/nginx/nginx.conf
         - conf.d:/etc/nginx/conf.d
         - snippets:/etc/nginx/snippets
+        - templates:/etc/nginx/templates
         #- /etc/nginx:/etc/nginx
         #- /etc/letsencrypt:/etc/letsencrypt
         - /etc/ssl:/etc/ssl
@@ -23,7 +24,8 @@ services:
           soft: 100000
           hard: 100000
       restart: unless-stopped
-      logging:
-        driver: journald
-        options:
-          tag: "docker/nginx/{{.Name}}"
+    logging:
+      driver: json-file
+      options:
+        max-size: "100m"
+        max-file: "5"

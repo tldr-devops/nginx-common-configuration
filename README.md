@@ -30,11 +30,13 @@ Collection of Nginx configs for most popular CMS/CMF/Frameworks based on PHP.
 Docker image, but I haven't checked it properly yet, their configs require addition nginx modules and setup
 and it can't be just copied to the usual nginx setup. However, you can use it with docker.
 Also I don't agree with nginx microcache for every site, see known traps.
+- [hub.docker.com/_/nginx](https://hub.docker.com/_/nginx/)  
+Official nginx docker image and docs.
 
 So here I'm trying to put together all (my) good patterns and knowledge, and organize it as simply as possible in comparison with complex examples above. So anyone will be able to copy this configs and get a good nginx setup out of the box :)
 
 Time track:
-- [Filipp Frizzy](https://github.com/Friz-zy/) 42.41h
+- [Filipp Frizzy](https://github.com/Friz-zy/) 45.56h
 
 ### Support
 
@@ -91,6 +93,9 @@ Include for dynamic dns resolving, see known traps
 Template of common site configuration
 * `static_location.conf`  
 Include with location for static files
+
+# Dockerfile
+`Dockerfile` example with build args, configs copying and custom envsubst template engine
 
 #### Docker-compose
 `docker-compose.yml` example for nginx
@@ -264,6 +269,13 @@ can be used for attack to you. For example, you competitors can add to their sit
 Then valid user after visit to the their site will be automatically blocked on your site 😆
 You can fight with this practice using `http_referer`, see `snippets/referer.conf.j2` template ;)
 Warning: I have not tested this code yet
+
+#### Default templating engine in official docker image can't proceed variables with default values like `${var:-$DEFAULT}`
+
+By default nginx in docker use [GNU envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html)
+that [can't proceed variables with default values](https://stackoverflow.com/questions/50230361/envsubst-default-values-for-unset-variables).
+You can use instead [a8m envsubst](https://github.com/a8m/envsubst) or [stephenc envsub](https://github.com/stephenc/envsub),
+first one already has a prebuilded binary for x86_64 arch, check the `Dockerfile` in this repo ;)
 
 #### Includes like `<dir>/*.conf` are processed in the alphabetic order
 
