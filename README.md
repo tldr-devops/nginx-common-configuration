@@ -36,7 +36,7 @@ Official nginx docker image and docs.
 So here I'm trying to put together all (my) good patterns and knowledge, and organize it as simply as possible in comparison with complex examples above. So anyone will be able to copy this configs and get a good nginx setup out of the box :)
 
 Time track:
-- [Filipp Frizzy](https://github.com/Friz-zy/) 45.56h
+- [Filipp Frizzy](https://github.com/Friz-zy/) 46.23h
 
 ### Support
 
@@ -73,25 +73,25 @@ SSL best practice from [mozilla](https://ssl-config.mozilla.org/#server=nginx&ve
 #### Snippets
 Templates and includes. You can also use [config generator](https://www.digitalocean.com/community/tools/nginx) from digitalocean :)
 
-* `corps.conf.j2`  
+* `corps.include.template`  
 Template of corps politic for multiple subdomains setup
 * `default.conf`  
 Example of default config with nginx_status, let's encrypt check and redirect to https
-* `fastcgi.conf`  
+* `fastcgi.include`  
 Include for php locations: fastcgi parameters, timeouts and cache example
-* `headers.conf`  
+* `headers.include`  
 Include with all headers, see known traps
-* `protected_locations.conf`  
+* `protected_locations.include`  
 Include with protected locations with 'deny all'
-* `proxy.conf`  
+* `proxy.include`  
 Include for proxy locations: proxy headers, parameters, timeouts and cache example
-* `referer.conf.j2`  
+* `referer.include.template`  
 Template of referer protection for cases when you concurents use your fail2ban protection against you, see known traps
-* `resolver.conf`  
+* `resolver.conf.template`  
 Include for dynamic dns resolving, see known traps
-* `site.conf.j2`  
+* `site.conf.template`  
 Template of common site configuration
-* `static_location.conf`  
+* `static_location.include`  
 Include with location for static files
 
 # Dockerfile
@@ -220,7 +220,7 @@ After all produce only `Name2` header in response.
 So use add_header.conf include or copy all headers manually 
 into sections under HTTP one.
 ```
-include /etc/nginx/snippets/headers.conf
+include /etc/nginx/snippets/headers.include
 ```
 
 #### DNS resolving and cache in Docker, Kubernetes and other dynamic environments
@@ -267,7 +267,7 @@ can be used for attack to you. For example, you competitors can add to their sit
 ```
 
 Then valid user after visit to the their site will be automatically blocked on your site 😆
-You can fight with this practice using `http_referer`, see `snippets/referer.conf.j2` template ;)
+You can fight with this practice using `http_referer`, see `snippets/referer.include.template` template ;)
 Warning: I have not tested this code yet
 
 #### Default templating engine in official docker image can't proceed variables with default values like `${var:-$DEFAULT}`

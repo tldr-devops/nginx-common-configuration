@@ -24,7 +24,9 @@
 # kube-dns.kube-system.svc.cluster.local - k8s resolver
 # 172.16.0.23 - aws default resolver
 
-resolver 127.0.0.11 valid=30s ipv6=off;
+# This default valuse will work only with modified envsubst
+# see known traps
+resolver ${RESOLVER_URL:-127.0.0.11} valid=${RESOLVER_TTL:-30s} ipv6=off;
 
 # A timeout for name resolution
 resolver_timeout 30s; # default is 30s

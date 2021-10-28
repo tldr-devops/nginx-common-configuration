@@ -7,5 +7,5 @@ location ~* \.(js|css|png|jpg|jpeg|gif|ico|swf|eot|ttf|otf|woff|woff2)$ {
     expires 30d;
 
     # add_header will override all previous directives from parent sections
-    include snippets/headers.conf;
+    include snippets/headers.include;
 }

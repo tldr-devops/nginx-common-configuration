@@ -1,6 +1,6 @@
 # http://nginx.org/en/docs/http/ngx_http_referer_module.html
 
-valid_referers none blocked server_names *.{{ item.domain }};
+valid_referers none blocked server_names *.${SERVER_DOMAIN};
 
 if ($invalid_referer) {
     return 307 $http_referer;
