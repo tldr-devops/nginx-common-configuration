@@ -3,9 +3,6 @@
 Nginx configs. Not the most powerful, productive or the best one. Just useful configs, which I would like to see in default nginx packages out of the box 😆
 Bonus: fail2ban, filebeat, dockerfile and docker-compose configs for nginx :)
 
-Warning: I'm living in Belarus - a country between the EU and Russia. [And today we are fighting for our freedom against 'the last dictator of the Europe'](https://www.euronews.com/2020/06/25/belarus-is-no-longer-scared-of-lukashenko-europe-s-last-dictator-will-fall-view).
-So I can't guarantee that I'll be able to maintain this repo scrupulously this time. Sorry, guys
-
 **Motivation**: I have been using nginx for the last 5 years at least, and I configured it really for hundreds setups of 30+ companies and startups: sites, apps, websockets, proxies, load balancing, from a few up to 1k rps, etc... And I'm a little bit disappointed by [the official nginx wiki](https://www.nginx.com/resources/wiki/).
 The last drop was this [blog post in the official blog](https://www.nginx.com/blog/help-the-world-by-healing-your-nginx-configuration/):
 this post doesn't provide a complete solution, half of these tips can be included into nginx configs or snippets by default,
