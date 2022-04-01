@@ -26,7 +26,7 @@ Another one common boilerplate.
 - [elasticweb/nginx-configs](https://github.com/elasticweb/nginx-configs)  
 Collection of Nginx configs for most popular CMS/CMF/Frameworks based on PHP.
 - [openbridge/nginx](https://github.com/openbridge/nginx)  
-Docker image, but I haven't checked it properly yet, their configs require addition nginx modules and setup
+Docker image, but I haven't checked it properly yet, their configs require additional nginx modules and setup
 and it can't be just copied to the usual nginx setup. However, you can use it with docker.
 Also I don't agree with nginx microcache for every site, see known traps.
 - [hub.docker.com/_/nginx](https://hub.docker.com/_/nginx/)  
