@@ -31,6 +31,8 @@ and it can't be just copied to the usual nginx setup. However, you can use it wi
 Also I don't agree with nginx microcache for every site, see known traps.
 - [hub.docker.com/_/nginx](https://hub.docker.com/_/nginx/)  
 Official nginx docker image and docs.
+- [nginx-resources](https://github.com/fcambus/nginx-resources)  
+A collection of resources covering Nginx, Nginx + Lua, OpenResty and Tengine.
 
 So here I'm trying to put together all (my) good patterns and knowledge, and organize it as simply as possible in comparison with complex examples above. So anyone will be able to copy this configs and get a good nginx setup out of the box :)
 
