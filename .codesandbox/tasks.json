@@ -32,6 +32,6 @@
     "clean-nginx-logs": {
       "name": "Clean nginx access and error logs",
       "command": "echo > /var/log/nginx/*.log"
-    },
+    }
   }
 }
