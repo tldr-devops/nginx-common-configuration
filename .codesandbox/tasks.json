@@ -7,7 +7,7 @@
       "command": "/docker-entrypoint.sh nginx -g 'daemon off;'",
       "runAtStart": true,
       "preview": {
-        "port": 80,
+        "port": 3000,
         "prLink": "devtool"
       }
     },
@@ -28,6 +28,10 @@
         "files": ["**/*"],
         "branch": true
       }
-    }
+    },
+    "clean-nginx-logs": {
+      "name": "Clean nginx access and error logs",
+      "command": "echo > /var/log/nginx/*.log"
+    },
   }
 }
