@@ -1,0 +1,32 @@
+{
+  "$schema": "https://codesandbox.io/schemas/tasks.json",
+  "tasks": {
+    "start-nginx": {
+      "name": "Run nginx server",
+      "command": "/docker-entrypoint.sh nginx -g 'daemon off;'",
+      "runAtStart": true,
+      "preview": {
+        "port": 80,
+        "prLink": "devtool"
+      }
+    },
+    "tail-access-log": {
+      "name": "Tail nginx access log",
+      "command": "tail -f /var/log/nginx/access.log",
+      "runAtStart": true
+    },
+    "tail-error-log": {
+      "name": "Tail nginx error log",
+      "command": "tail -f /var/log/nginx/error.log",
+      "runAtStart": true
+    },
+    "reload-nginx": {
+      "name": "Reload nginx on config changes",
+      "command": "nginx -t && nginx -s reload",
+      "restartOn": {
+        "files": ["**/*"],
+        "branch": true
+      }
+    }
+  }
+}
