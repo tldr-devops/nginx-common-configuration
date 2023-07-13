@@ -1,5 +1,6 @@
 {
   "$schema": "https://codesandbox.io/schemas/tasks.json",
+  "setupTasks": [],
   "tasks": {
     "start-nginx": {
       "name": "Run nginx server",
