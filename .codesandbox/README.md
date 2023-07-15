@@ -16,19 +16,19 @@ Note: If you do not clone the repository, you will not be able to perform any of
 
 Your project will start inside the rootless [docker container](./Dockerfile), where you can modify any configuration and execute shell scripts. For your convenience, I have prepared some [scripts](./tasks.json) for you:
 
-- Run nginx server:
+- **Run nginx server**:  
     This script executes `/docker-entrypoint.sh` and starts Nginx in the foreground. Codesandbox should open the preview frame with the URL using port 3000. Make sure to use the same HTTP port (3000) in your configurations within this sandbox.
 
-- Tail nginx access log:
+- **Tail nginx access log**:  
     Execute this command to view the contents of `/var/log/nginx/access.log`. By default, all access logs are stored here unless you override the default configuration.
 
-- Tail nginx error log:
+- **Tail nginx error log**:  
     Execute this command to view the contents of `/var/log/nginx/error.log`. By default, all error logs are stored here unless you override the default configuration.
 
-- Reload nginx on config changes:
+- **Reload nginx on config changes**:  
     This command validates and reloads the Nginx configurations automatically whenever changes are made.
 
-- Clean nginx access and error logs:
+- **Clean nginx access and error logs**:  
     Execute this command to clean all log files located within the `/var/log/nginx` directory.
 
 Feel free to explore and experiment with your Nginx configurations in this interactive sandbox. Happy testing!
@@ -47,10 +47,10 @@ If you are seeking a skilled DevOps lead or architect to enhance your project, I
 
 There are a couple of ways you can support my projects:
 
-* Sending Pull Requests (PRs)
+* **Sending Pull Requests (PRs)**:  
     If you come across any improvements or suggestions for my configurations or texts, feel free to send me Pull Requests (PRs) with your proposed changes. I appreciate your contributions <3
 
-* Making Donations:
+* **Making Donations**:  
     If you find my projects valuable and would like to support them financially, you can make a donation. Your contributions will go towards further development, maintenance, and improvement of the projects. Your support is greatly appreciated and helps to ensure the continued success of the projects.
 
   - [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/filipp_frizzy)

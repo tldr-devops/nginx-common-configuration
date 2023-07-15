@@ -60,10 +60,10 @@ If you are seeking a skilled DevOps lead or architect to enhance your project, I
 
 There are a couple of ways you can support my projects:
 
-* Sending Pull Requests (PRs)
+* **Sending Pull Requests (PRs)**:  
     If you come across any improvements or suggestions for my configurations or texts, feel free to send me Pull Requests (PRs) with your proposed changes. I appreciate your contributions <3
 
-* Making Donations:
+* **Making Donations**:  
     If you find my projects valuable and would like to support them financially, you can make a donation. Your contributions will go towards further development, maintenance, and improvement of the projects. Your support is greatly appreciated and helps to ensure the continued success of the projects.
 
   - [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/filipp_frizzy)
