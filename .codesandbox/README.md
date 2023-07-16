@@ -5,9 +5,11 @@
 
 Welcome to the interactive sandbox featuring the [Nginx Web Server](href="http://nginx.org), where you can test your Nginx configurations.
 
-To begin, clone this repository to your account by clicking "Fork" or "Create Branch" in the top right corner. This is necessary to access the preview window, open the terminal, and make changes to the code.
+To begin, clone this repository to your account by clicking "Create Branch" or "Fork" in the top right corner. This is necessary to access the preview window, open the terminal, and make changes to the code.
 
 Note: If you do not clone the repository, you will not be able to perform any of the aforementioned actions.
+
+To protect your security, default config will not allow your browser to display the page if another site has embedded it. To see preview, you need to open it in a new window. For example, my Firefox provide me similar message and button to open this preview in a separate tab.
 
 [Codesandbox](https://codesandbox.io) provides [Cloud Sandboxes](https://codesandbox.io/docs/learn/environment/vm) with the following specifications:
 - 2 vCPUs
