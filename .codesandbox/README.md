@@ -3,11 +3,13 @@
 [![#StandWithBelarus](https://img.shields.io/badge/Belarus-red?label=%23%20Stand%20With&labelColor=white&color=red)
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Presidential_Standard_of_Belarus_%28fictional%29.svg/240px-Presidential_Standard_of_Belarus_%28fictional%29.svg.png" width="20" height="20" alt="Voices From Belarus" />](https://bysol.org/en/) [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://vshymanskyy.github.io/StandWithUkraine)
 
-Welcome to the interactive sandbox featuring the [Nginx Web Server](href="http://nginx.org), where you can test your Nginx configurations.
+Welcome to the interactive sandbox featuring the [Nginx Web Server](http://nginx.org), where you can test your Nginx configurations.
 
 To begin, clone this repository to your account by clicking "Create Branch" or "Fork" in the top right corner. This is necessary to access the preview window, open the terminal, and make changes to the code.
 
 Note: If you do not clone the repository, you will not be able to perform any of the aforementioned actions.
+
+Another note: you should reload preview window after updating html content.
 
 To protect your security, default config will not allow your browser to display the page if another site has embedded it. To see preview, you need to open it in a new window. For example, my Firefox provide me similar message and button to open this preview in a separate tab.
 
