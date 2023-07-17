@@ -5,7 +5,7 @@
 
 Welcome to the interactive sandbox featuring the [Nginx Web Server](http://nginx.org), where you can test your Nginx configurations.
 
-To begin, clone this repository to your account by clicking "Create Branch" or "Fork" in the top right corner. This is necessary to access the preview window, open the terminal, and make changes to the code.
+To begin, clone this repository to your [codesandbox](https://codesandbox.io) account by clicking "Create Branch" or "Fork" in the top right corner. This is necessary to access the preview window, open the terminal, and make changes to the code.
 
 Note: If you do not clone the repository, you will not be able to perform any of the aforementioned actions.
 
